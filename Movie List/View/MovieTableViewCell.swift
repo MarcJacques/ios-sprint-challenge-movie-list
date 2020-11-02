@@ -9,16 +9,32 @@
 import UIKit
 
 class MovieTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var movieTitleLabel: UILabel!
+        
+    @IBOutlet weak var seenButton: UIButton!
+    
+    var movie: Movie? {
+        didSet {
+            updateViews()
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    private func updateViews() {
+        guard let movie = movie else { return }
+        movieTitleLabel.text = movie.title
+        if movie.seen == false {
+            seenButton.setTitle("Seen", for: .normal)
+        } else {
+            seenButton.setTitle("Not Seen", for: .normal)
+        }
     }
-
+    
+    
+    
+    @IBAction func seenButtonTapped(_ sender: UIButton) {
+        movie?.seen.toggle()
+        updateViews()
+    }
+    
 }

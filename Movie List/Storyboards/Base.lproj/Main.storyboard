@@ -12,7 +12,7 @@
         <!--Movie List-->
         <scene sceneID="JuF-zu-xFE">
             <objects>
-                <viewController id="Fga-mz-fbt" sceneMemberID="viewController">
+                <viewController id="Fga-mz-fbt" customClass="MovieListViewController" customModule="Movie_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lHU-Yc-lo6">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MovieCell" id="VEq-gu-0fa">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MovieCell" id="VEq-gu-0fa" customClass="MovieTableViewCell" customModule="Movie_List" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="428" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VEq-gu-0fa" id="fxx-Pw-JG7">
@@ -37,6 +37,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndp-pt-RRn">
                                                     <rect key="frame" x="323" y="6" width="85" height="30"/>
                                                     <state key="normal" title="Seen Button"/>
+                                                    <connections>
+                                                        <action selector="seenButtonTapped:" destination="VEq-gu-0fa" eventType="touchUpInside" id="SaZ-gk-6pL"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -46,8 +49,16 @@
                                                 <constraint firstItem="F7h-hI-6JM" firstAttribute="top" secondItem="fxx-Pw-JG7" secondAttribute="top" constant="11" id="ujm-O0-WQc"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="movieTitleLabel" destination="F7h-hI-6JM" id="m8g-Ok-b6L"/>
+                                            <outlet property="seenButton" destination="ndp-pt-RRn" id="iMQ-Yq-7Mj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Fga-mz-fbt" id="fhA-go-ZA8"/>
+                                    <outlet property="delegate" destination="Fga-mz-fbt" id="CB1-3o-YLz"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iMh-fQ-Gth"/>
@@ -66,15 +77,18 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="iOE-kR-MgU" id="UCb-g9-sjB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4W-WD-jb7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1197.1962616822429" y="171.70626349892009"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Movie View Controller-->
         <scene sceneID="kzR-eP-ekc">
             <objects>
-                <viewController id="QTo-Uw-lOf" sceneMemberID="viewController">
+                <viewController id="QTo-Uw-lOf" customClass="AddMovieViewController" customModule="Movie_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oe3-GQ-pMw">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,6 +96,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4AP-41-e4h">
                                 <rect key="frame" x="178" y="146" width="75" height="30"/>
                                 <state key="normal" title="Add Movie"/>
+                                <connections>
+                                    <action selector="addMovieButtonTapped:" destination="QTo-Uw-lOf" eventType="touchUpInside" id="Kdp-iR-RCw"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new Movie to the list" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgS-Hy-Oly">
                                 <rect key="frame" x="20" y="55" width="374" height="35"/>
@@ -108,6 +125,9 @@
                             <constraint firstItem="AgS-Hy-Oly" firstAttribute="top" secondItem="QGe-gS-7PJ" secondAttribute="top" constant="55" id="oO2-bW-mdP"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="movieTitleTextField" destination="ef2-T5-zDp" id="t4H-BT-sWF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZuZ-On-WBm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
